@@ -3,13 +3,32 @@
 const chrome = require('../lib/headless-chrome');
 
 require('yargs')
-    .command('tg:variants:list [username] [password]', 'List variants', (yargs) => {
+    .env('TG')
+    .usage('$0 [command] [options]'
+        + '\n'
+        + '\nIt is recommended that username and password be set as environment variables of'
+        + '\nTG_USERNAME and TG_PASSWORD, respectively.')
+    .option('username', {
+        describe: 'Username/email to sign in with',
+        demandOption: true,
+    })
+    .option('password', {
+        describe: 'Password to sign in with',
+        demandOption: true,
+    })
+    .option('verbosity', {
+        alias: 'v',
+        describe: 'Choose different levels of verbosity',
+        choices: ['v', 'vv'],
+    })
+    .command('tg:resource:list [resource]', 'List a given resource', (yargs) => {
         yargs
-            .positional('username', {
-                describe: 'Username/email to sign in with',
-            })
-            .positional('password', {
-                describe: 'Password to sign in with',
+            .positional('resource', {
+                describe: 'AJAX resource available in TradeGecko; should confirm existance by seeing XHR'
+                    + ' requests in normal session that match the request pattern'
+                    + ' https://go.tradegecko.com/ajax/%s'
+                    + ' \n\nExample of valid resources include: products, variants',
+                type: 'string',
             })
             .option('limit', {
                 describe: 'Max number of results to fetch',
@@ -21,8 +40,11 @@ require('yargs')
                 default: 1,
                 number: true,
             })
-    }, (argv) => {
-        chrome.listVariants(argv.username, argv.password, argv.page, argv.limit);
-    })
+            .option('fields', {
+                describe: 'Fields to return in listed resources as CSV for example: id,created_at',
+            })
+            .coerce('fields', f => f.split(',').map(s => s.trim()))
+            .example('tg:resource:list products --limit=1 -v=vv --fields=id,created_at', 'List id and created at fields for one product')
+    }, chrome.listResources)
     .help()
     .argv
