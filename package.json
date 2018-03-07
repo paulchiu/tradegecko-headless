@@ -11,5 +11,8 @@
   "dependencies": {
     "puppeteer": "^1.1.1",
     "yargs": "^11.0.0"
+  },
+  "devDependencies": {
+    "prettier": "1.11.1"
   }
 }
