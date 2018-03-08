@@ -59,6 +59,35 @@ require('yargs')
     chrome.listResources
   )
   .command(
+    'tg:ajax:fetch [method] [endpoint]',
+    'Perform a fetch call against the TradeGecko AJAX API, see MDN entry for Fetch API'
+    + ' for details',
+    yargs => {
+      yargs.positional('method', {
+        describe: 'Request method, such as "POST"',
+        type: 'string',
+      })
+      yargs.positional('endpoint', {
+        describe: 'Resource endpoint, such a "products", please note that all endpoints'
+        + ' automatically have https://go.tradegecko.com/ajax/ prefixed',
+        type: 'string',
+      })
+      .option('body', {
+        describe: 'Body to be provided to the fetch call, if provided should be a JSON string',
+        string: true,
+      })
+      .example(
+        "tg:ajax:fetch GET 'products?limit=1&page=1'",
+        "Get the first product in the user's inventory"
+      )
+      .example(
+        "tg:ajax:fetch POST 'variants/123/channels' --body='{\"channel\":{\"channel_id\":321}}'",
+        'Publish variant 123 on channel 321'
+      );
+    },
+    chrome.fetch
+  )
+  .command(
     'tg:variant:publish-on-channel [variantId] [channelId]',
     'Publish a given variant on a given channel',
     yargs => {
