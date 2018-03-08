@@ -58,4 +58,23 @@ require('yargs')
     },
     chrome.listResources
   )
+  .command(
+    'tg:variant:publish-on-channel [variantId] [channelId]',
+    'Publish a given variant on a given channel',
+    yargs => {
+      yargs.positional('variantId', {
+        describe: 'Id of the variant, find it by getting resource list for "variants"',
+        type: 'string',
+      })
+      yargs.positional('channelId', {
+        describe: 'Id of the channel, find it by getting resource list for "channels"',
+        type: 'string',
+      })
+      .example(
+        'tg:variant:publish-on-channel 123 321',
+        'Publish variant with id 123 on channel 321'
+      );
+    },
+    chrome.publishVariantOnChannel
+  )
   .help().argv;
