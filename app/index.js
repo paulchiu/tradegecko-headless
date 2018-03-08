@@ -91,7 +91,7 @@ require("yargs")
     chrome.fetch
   )
   .command(
-    "tg:resources-file:fetch [file] [method] [endpointTemplate] [bodyTemplate]",
+    "tg:resources-file:fetch [file] [method] [endpoint]",
     "Perform fetch action on a provided JSON file",
     yargs => {
       yargs
@@ -104,17 +104,17 @@ require("yargs")
           describe: 'Request method, such as "POST"',
           type: "string"
         })
-        .positional("endpointTemplate", {
+        .positional("endpoint", {
           describe:
             "Mustashe template string representing the endpoint. Template data will be a" +
             "record from the resources file provided.",
           type: "string"
         })
-        .positional("bodyTemplate", {
+        .option("body", {
           describe:
             "Mustashe template string representing the fetch body. Template data will be a" +
             "record from the resources file provided. If provided it should be a JSON string.",
-          type: "string"
+          string: true,
         })
         .option("offset", {
           describe: "Number of variants to skip",
@@ -125,7 +125,11 @@ require("yargs")
           describe: "Max number of variants to publish",
           default: 10000,
           number: true
-        });
+        })
+        .example(
+          'tg:resources-file:fetch variants.json POST "variants/{{id}}/channels" --body=\'{"channel":{"channel_id":123}}\'',
+          'Publish all variants in the provided file to channel 123'
+        );
     },
     chrome.fetchWithResourcesFile
   )
