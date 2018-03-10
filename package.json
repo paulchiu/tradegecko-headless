@@ -9,6 +9,7 @@
   "author": "Paul",
   "license": "MIT",
   "dependencies": {
+    "cli-progress": "^1.8.0",
     "mustache": "^2.3.0",
     "puppeteer": "^1.1.1",
     "yargs": "^11.0.0"

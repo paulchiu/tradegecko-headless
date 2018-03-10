@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const chrome = require("../lib/headless-chrome");
+const commands = require("../lib/commands");
 
 require("yargs")
   .env("TG")
@@ -24,8 +24,8 @@ require("yargs")
     choices: ["v", "vv"]
   })
   .command(
-    "tg:resource:list [resource]",
-    "List a given resource",
+    "tg:resource-list:download [resource] [file]",
+    "Download a list of a given resource",
     yargs => {
       yargs
         .positional("resource", {
@@ -36,14 +36,18 @@ require("yargs")
             " \n\nExample of valid resources include: products, variants",
           type: "string"
         })
+        .positional('file', {
+          describe: 'File to sasve resources to; output will be in JSON',
+          type: 'string',
+        })
+        .option("offset", {
+          describe: "Results to offset",
+          default: 0,
+          number: true
+        })
         .option("limit", {
           describe: "Max number of results to fetch",
           default: 10000,
-          number: true
-        })
-        .option("page", {
-          describe: "TradeGecko page to start getting results from",
-          default: 1,
           number: true
         })
         .option("fields", {
@@ -52,47 +56,15 @@ require("yargs")
         })
         .coerce("fields", f => f.split(",").map(s => s.trim()))
         .example(
-          "tg:resource:list products --limit=1 -v=vv --fields=id,created_at",
-          "List id and created at fields for one product"
+          "tg:resource:list products products.json --limit=1 -v=vv --fields=id,created_at",
+          "Download id and created at fields for one product"
         );
     },
-    chrome.listResources
+    commands.downloadResourceList
   )
   .command(
-    "tg:ajax:fetch [method] [endpoint]",
-    "Perform a fetch call against the TradeGecko AJAX API, see MDN entry for Fetch API" +
-      " for details",
-    yargs => {
-      yargs
-        .positional("method", {
-          describe: 'Request method, such as "POST"',
-          type: "string"
-        })
-        .positional("endpoint", {
-          describe:
-            'Resource endpoint, such a "products", please note that all endpoints' +
-            " automatically have https://go.tradegecko.com/ajax/ prefixed",
-          type: "string"
-        })
-        .option("body", {
-          describe:
-            "Body to be provided to the fetch call, if provided should be a JSON string",
-          string: true
-        })
-        .example(
-          "tg:ajax:fetch GET 'products?limit=1&page=1'",
-          "Get the first product in the user's inventory"
-        )
-        .example(
-          "tg:ajax:fetch POST 'variants/123/channels' --body='{\"channel\":{\"channel_id\":321}}'",
-          "Publish variant 123 on channel 321"
-        );
-    },
-    chrome.fetch
-  )
-  .command(
-    "tg:resources-file:fetch [file] [method] [endpoint]",
-    "Perform fetch action on a provided JSON file",
+    "tg:resource-list:fetch [file] [method] [endpoint]",
+    "Perform fetch action on each record of a provided resource list JSON file",
     yargs => {
       yargs
         .positional("file", {
@@ -127,10 +99,42 @@ require("yargs")
           number: true
         })
         .example(
-          'tg:resources-file:fetch variants.json POST "variants/{{id}}/channels" --body=\'{"channel":{"channel_id":123}}\'',
+          'tg:resource-list:fetch variants.json POST "variants/{{id}}/channels" --body=\'{"channel":{"channel_id":123}}\'',
           'Publish all variants in the provided file to channel 123'
         );
     },
-    chrome.fetchWithResourcesFile
+    commands.fetchWithResourceList
+  )
+  .command(
+    "tg:ajax:fetch [method] [endpoint]",
+    "Perform a fetch call against the TradeGecko AJAX API, see MDN entry for Fetch API" +
+      " for details",
+    yargs => {
+      yargs
+        .positional("method", {
+          describe: 'Request method, such as "POST"',
+          type: "string"
+        })
+        .positional("endpoint", {
+          describe:
+            'Resource endpoint, such a "products", please note that all endpoints' +
+            " automatically have https://go.tradegecko.com/ajax/ prefixed",
+          type: "string"
+        })
+        .option("body", {
+          describe:
+            "Body to be provided to the fetch call, if provided should be a JSON string",
+          string: true
+        })
+        .example(
+          "tg:ajax:fetch GET 'products?limit=1&page=1'",
+          "Get the first product in the user's inventory"
+        )
+        .example(
+          "tg:ajax:fetch POST 'variants/123/channels' --body='{\"channel\":{\"channel_id\":321}}'",
+          "Publish variant 123 on channel 321"
+        );
+    },
+    commands.fetch
   )
   .help().argv;
