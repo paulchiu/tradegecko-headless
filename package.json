@@ -1,11 +1,24 @@
 {
-  "name": "tgbot",
-  "version": "0.1.0",
-  "description": "TradeGecko automation bot",
-  "main": "index.js",
+  "name": "tradegecko-headless",
+  "version": "1.0.0",
+  "description": "TradeGecko headless CLI",
+  "main": "app/index.js",
+  "preferGlobal": true,
+  "bin": {
+    "tgcli": "app/index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Paul",
-  "license": "MIT"
+  "author": "Paul Chiu",
+  "license": "MIT",
+  "dependencies": {
+    "cli-progress": "^1.8.0",
+    "mustache": "^2.3.0",
+    "puppeteer": "^1.1.1",
+    "yargs": "^11.0.0"
+  },
+  "devDependencies": {
+    "prettier": "1.11.1"
+  }
 }
