@@ -1,6 +1,6 @@
 {
   "name": "tradegecko-headless",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "TradeGecko headless CLI",
   "repository": {
     "type": "git",

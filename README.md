@@ -8,11 +8,11 @@ Headless [TradeGecko](https://www.tradegecko.com/) interaction CLI for those wit
 npm install --global tradegecko-headless
 ```
 
-If you receive the error [ERROR: Failed to download Chromium](https://github.com/GoogleChrome/puppeteer/issues/375), try
+If you receive the error [ERROR: Failed to download Chromium](https://github.com/GoogleChrome/puppeteer/issues/375),
+please see the [NPM article on preventing premission errors](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
 
-```
-sudo npm install --global tradegecko-headless --unsafe-perm=true
-```
+Given that a Chrome headless instance will need to be launched, it is advised that a local install
+be used if permission issues exist. 
 
 # Usage
 
@@ -115,5 +115,7 @@ The following list of resources were obtained by observing Chrome debugger XHR a
 
 # Built with
 
-- [Puppeteer](https://github.com/GoogleChrome/puppeteer) for headless browser interaction
+- [Puppeteer](https://github.com/GoogleChrome/puppeteer) for headless Chrome interaction
 - [yargs](https://github.com/yargs/yargs) for CLI
+- [cli-progress](https://www.npmjs.com/package/cli-progress) for progress bars
+- [mustache](https://www.npmjs.com/package/mustache) for parameter templates
