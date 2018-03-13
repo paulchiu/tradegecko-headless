@@ -8,6 +8,12 @@ Headless [TradeGecko](https://www.tradegecko.com/) interaction CLI for those wit
 npm install --global tradegecko-headless
 ```
 
+If you receive the error [ERROR: Failed to download Chromium](https://github.com/GoogleChrome/puppeteer/issues/375), try
+
+```
+sudo npm install --global tradegecko-headless --unsafe-perm=true
+```
+
 # Usage
 
 The following usage examples should be read sequentially as it references results from previous commands.
