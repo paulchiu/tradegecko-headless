@@ -104,6 +104,7 @@ For a full list of commands, execute the program with `--help`. All commands sho
 |-------|-----------|
 |`tg:resource-list:download [resource] [file]`|Download a list of a given resource|
 |`tg:resource-list:fetch [listFile] [responsesFile] [method] [endpoint]`|Perform fetch action on each record of a provided resource list JSON file|
+|`tg:resource:count [resource]`|Get the total records of a given resource|
 |`tg:ajax:fetch [method] [endpoint]`|Perform a fetch call against the TradeGecko AJAX API, see the [MDN entry for Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for details|                                
 # Known TradeGecko resources
 
@@ -112,6 +113,8 @@ The following list of resources were obtained by observing Chrome debugger XHR a
 - channels
 - products
 - variants
+
+Although not fully tested, most resources listed in the [TradeGecko API Reference](http://developer.tradegecko.com/) should be available as well.
 
 # Built with
 
