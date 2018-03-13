@@ -63,13 +63,18 @@ require("yargs")
     commands.downloadResourceList
   )
   .command(
-    "tg:resource-list:fetch [file] [method] [endpoint]",
+    "tg:resource-list:fetch [listFile] [responsesFile] [method] [endpoint]",
     "Perform fetch action on each record of a provided resource list JSON file",
     yargs => {
       yargs
-        .positional("file", {
+        .positional("listFile", {
           describe:
-            "Resources file. This should be a JSON file like one created by tg:resource:list",
+            "Resources list file. This should be a JSON file like one created by tg:resource:list",
+          type: "string"
+        })
+        .positional("responsesFile", {
+          describe:
+            "Fetch responses file. This will be another list file that may or may not be resources.",
           type: "string"
         })
         .positional("method", {
@@ -99,7 +104,7 @@ require("yargs")
           number: true
         })
         .example(
-          'tg:resource-list:fetch variants.json POST "variants/{{id}}/channels" --body=\'{"channel":{"channel_id":123}}\'',
+          'tg:resource-list:fetch variants.json channels.json POST "variants/{{id}}/channels" --body=\'{"channel":{"channel_id":123}}\'',
           'Publish all variants in the provided file to channel 123'
         );
     },
