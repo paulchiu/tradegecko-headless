@@ -6,6 +6,8 @@ Headless TradeGecko interaction CLI for those without API access.
 
 The following usage examples should be read sequentially as it references results from previous commands.
 
+It is also recommended that all result files be viewed or manipulated with [jq](https://stedolan.github.io/jq/).
+
 ## Set username and password
 
 Username and passowrd can be provided as environment variables or as parameters. It is
@@ -70,10 +72,13 @@ Plese note the following outputs have been shortended for readability.
 
 # Commands
 
-For a full list of commands, execute the program with `--help`
+For a full list of commands, execute the program with `--help`. All commands should be prefixed with `./app/index.js`
 
-```
-```
+|Command|Description|
+|-------|-----------|
+|`tg:resource-list:download [resource] [file]`|Download a list of a given resource|
+|`tg:resource-list:fetch [listFile] [responsesFile] [method] [endpoint]`|Perform fetch action on each record of a provided resource list JSON file|
+|`tg:ajax:fetch [method] [endpoint]`|Perform a fetch call against the TradeGecko AJAX API, see the [MDN entry for Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for details|                                
 
 # Known valid resources
 
