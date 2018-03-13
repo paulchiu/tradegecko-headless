@@ -2,6 +2,10 @@
   "name": "tradegecko-headless",
   "version": "1.0.0",
   "description": "TradeGecko headless CLI",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulchiu/tradegecko-headless"
+  },
   "main": "app/index.js",
   "preferGlobal": true,
   "bin": {
