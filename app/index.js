@@ -36,9 +36,9 @@ require("yargs")
             " \n\nExample of valid resources include: products, variants",
           type: "string"
         })
-        .positional('file', {
-          describe: 'File to sasve resources to; output will be in JSON',
-          type: 'string',
+        .positional("file", {
+          describe: "File to sasve resources to; output will be in JSON",
+          type: "string"
         })
         .option("offset", {
           describe: "Results to offset",
@@ -91,7 +91,7 @@ require("yargs")
           describe:
             "Mustashe template string representing the fetch body. Template data will be a" +
             "record from the resources file provided. If provided it should be a JSON string.",
-          string: true,
+          string: true
         })
         .option("offset", {
           describe: "Number of variants to skip",
@@ -105,7 +105,7 @@ require("yargs")
         })
         .example(
           'tg:resource-list:fetch variants.json channels.json POST "variants/{{id}}/channels" --body=\'{"channel":{"channel_id":123}}\'',
-          'Publish all variants in the provided file to channel 123'
+          "Publish all variants in the provided file to channel 123"
         );
     },
     commands.fetchWithResourceList

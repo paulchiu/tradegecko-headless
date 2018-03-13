@@ -1,12 +1,32 @@
-# TradeGecko Headless
+# TradeGecko Headless CLI
 
-Headless TradeGecko interaction CLI for those without API access.
+Headless [TradeGecko](https://www.tradegecko.com/) interaction CLI for those without API access or for automating calls not yet published in the [TradeGecko API Reference](http://developer.tradegecko.com/).
+
+# Install
+
+```
+npm install --global tradegecko-headless
+```
 
 # Usage
 
 The following usage examples should be read sequentially as it references results from previous commands.
 
 It is also recommended that all result files be viewed or manipulated with [jq](https://stedolan.github.io/jq/).
+
+## Command pattern
+
+To use the CLI, identify the command you want to execute and provide any parameters and options.
+
+```
+tgcli [command] [options]
+```
+
+To see the full list of commands, execute
+
+```
+tgcli --help
+```
 
 ## Set username and password
 
@@ -18,12 +38,12 @@ export TG_USERNAME="foo@example.com"
 export TG_PASSWORD="bar"
 ```
 
-## Download variants
+## Download a list of resources
 
 Download 2nd and 3rd oldest `variants` resource, keeping only fields `id` and `created_at` and save them to file `variants.json`
 
 ```
-./app/index.js tg:resource-list:download variants variants.json --limit=2 --offset=1 --fields=id,created_at
+tgcli tg:resource-list:download variants variants.json --limit=2 --offset=1 --fields=id,created_at
 ```
 
 ### Sample output
@@ -43,13 +63,13 @@ Done
 [{"id":1,"created_at":"2017-01-11T11:00:00.000Z"},{"id":2,"created_at":"2017-01-11T12:00:00.000Z"}]
 ```
 
-## Fetch variants
+## Perform fetch actions on a JSON object list
 
 Make a fetch call using `variants.json` and output results to `fetched-variants.json`. The fetch
 call should make a GET call to get the variant by id.
 
 ```
-./app/index.js tg:resource-list:fetch variants.json fetched-variants.json GET "variants/{{id}}"
+tgcli tg:resource-list:fetch variants.json fetched-variants.json GET "variants/{{id}}"
 ```
 
 ### Sample output
@@ -72,19 +92,20 @@ Plese note the following outputs have been shortended for readability.
 
 # Commands
 
-For a full list of commands, execute the program with `--help`. All commands should be prefixed with `./app/index.js`
+For a full list of commands, execute the program with `--help`. All commands should be prefixed with `tgcli`.
 
 |Command|Description|
 |-------|-----------|
 |`tg:resource-list:download [resource] [file]`|Download a list of a given resource|
 |`tg:resource-list:fetch [listFile] [responsesFile] [method] [endpoint]`|Perform fetch action on each record of a provided resource list JSON file|
 |`tg:ajax:fetch [method] [endpoint]`|Perform a fetch call against the TradeGecko AJAX API, see the [MDN entry for Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for details|                                
+# Known TradeGecko resources
 
-# Known valid resources
+The following list of resources were obtained by observing Chrome debugger XHR activity for connections related to `https://go.tradegecko.com/ajax`
 
+- channels
 - products
 - variants
-- channels
 
 # Built with
 
