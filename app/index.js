@@ -56,7 +56,7 @@ require("yargs")
         })
         .coerce("fields", f => f.split(",").map(s => s.trim()))
         .example(
-          "tg:resource:list products products.json --limit=1 -v=vv --fields=id,created_at",
+          "tg:resource-list:download products products.json --limit=1 -v=vv --fields=id,created_at",
           "Download id and created at fields for one product"
         );
     },
@@ -109,6 +109,26 @@ require("yargs")
         );
     },
     commands.fetchWithResourceList
+  )
+  .command(
+    "tg:resource:count [resource]",
+    "Get the total records of a given resource",
+    yargs => {
+      yargs
+        .positional("resource", {
+          describe:
+            "AJAX resource available in TradeGecko; should confirm existance by seeing XHR" +
+            " requests in normal session that match the request pattern" +
+            " https://go.tradegecko.com/ajax/%s" +
+            " \n\nExample of valid resources include: products, variants",
+          type: "string"
+        })
+        .example(
+          "tg:resource:count products",
+          "Get the total number of products available"
+        );
+    },
+    commands.countResources
   )
   .command(
     "tg:ajax:fetch [method] [endpoint]",
