@@ -84,13 +84,13 @@ require("yargs")
         .positional("endpoint", {
           describe:
             "Mustashe template string representing the endpoint. Template data will be a" +
-            "record from the resources file provided.",
+            " record from the resources file provided.",
           type: "string"
         })
         .option("body", {
           describe:
             "Mustashe template string representing the fetch body. Template data will be a" +
-            "record from the resources file provided. If provided it should be a JSON string.",
+            " record from the resources file provided. If provided it should be a JSON string.",
           string: true
         })
         .option("offset", {
