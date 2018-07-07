@@ -37,7 +37,7 @@ require("yargs")
           type: "string"
         })
         .positional("file", {
-          describe: "File to sasve resources to; output will be in JSON",
+          describe: "File to save resources to; output can be be in JSON or CSV (see format option)",
           type: "string"
         })
         .option("offset", {
@@ -49,6 +49,11 @@ require("yargs")
           describe: "Max number of results to fetch",
           default: 10000,
           number: true
+        })
+        .option("format", {
+          describe: "File format of the output; supports JSON or CSV",
+          default: "json",
+          type: "string"
         })
         .option("fields", {
           describe:
