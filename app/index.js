@@ -61,7 +61,7 @@ require("yargs")
         })
         .coerce("fields", f => f.split(",").map(s => s.trim()))
         .example(
-          "tg:resource-list:download products products.json --limit=1 -v=vv --fields=id,created_at",
+          "tg:resource-list:download products products.json --limit=1 -v=vv --format=json --fields=id,created_at",
           "Download id and created at fields for one product"
         );
     },
