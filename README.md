@@ -12,7 +12,7 @@ If you receive the error [ERROR: Failed to download Chromium](https://github.com
 please see the [NPM article on preventing premission errors](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
 
 Given that a Chrome headless instance will need to be launched, it is advised that a local install
-be used if permission issues exist. 
+be used if permission issues exist.
 
 # Usage
 
@@ -36,7 +36,7 @@ tgcli --help
 
 ## Set username and password
 
-Username and passowrd can be provided as environment variables or as parameters. It is
+Username and password can be provided as environment variables or as parameters. It is
 recommended that environment variables be used.
 
 ```
@@ -81,10 +81,10 @@ tgcli tg:resource-list:fetch variants.json fetched-variants.json GET "variants/{
 ### Sample output
 
 ```
-Signing in ...                                                                                                                                                                                                     
-Performing fetches ...                                                                                                                                                                                             
- ████████████████████████████████████████ 100% | ETA: 0s | 2/2                  
-Saving responses to file ...                                                                                
+Signing in ...
+Performing fetches ...
+ ████████████████████████████████████████ 100% | ETA: 0s | 2/2
+Saving responses to file ...
 Done
 ```
 
@@ -105,7 +105,7 @@ For a full list of commands, execute the program with `--help`. All commands sho
 |`tg:resource-list:download [resource] [file]`|Download a list of a given resource|
 |`tg:resource-list:fetch [listFile] [responsesFile] [method] [endpoint]`|Perform fetch action on each record of a provided resource list JSON file|
 |`tg:resource:count [resource]`|Get the total records of a given resource|
-|`tg:ajax:fetch [method] [endpoint]`|Perform a fetch call against the TradeGecko AJAX API, see the [MDN entry for Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for details|                                
+|`tg:ajax:fetch [method] [endpoint]`|Perform a fetch call against the TradeGecko AJAX API, see the [MDN entry for Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for details|
 # Known TradeGecko resources
 
 The following list of resources were obtained by observing Chrome debugger XHR activity for connections related to `https://go.tradegecko.com/ajax`
