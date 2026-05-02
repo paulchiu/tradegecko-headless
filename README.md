@@ -1,3 +1,6 @@
+> [!WARNING]
+> This project is abandoned and has been archived in 2026. It is no longer maintained.
+
 # TradeGecko Headless CLI
 
 Headless [TradeGecko](https://www.tradegecko.com/) interaction CLI for those without API access or for automating calls not yet published in the [TradeGecko API Reference](http://developer.tradegecko.com/).
